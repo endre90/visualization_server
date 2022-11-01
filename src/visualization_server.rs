@@ -339,9 +339,9 @@ pub async fn visualization_server(
                         lifetime: Duration { sec: 2, nanosec: 0 },
                         scale: match frame.1.extra_data.mesh_scale {
                             Some(scale) => Vector3 {
-                                x: scale as f64,
-                                y: scale as f64,
-                                z: scale as f64,
+                                x: if scale != 0.0 {scale as f64} else {1.0},
+                                y: if scale != 0.0 {scale as f64} else {1.0},
+                                z: if scale != 0.0 {scale as f64} else {1.0},
                             },
                             None => Vector3 {
                                 x: 1.0,
@@ -350,10 +350,26 @@ pub async fn visualization_server(
                             },
                         },
                         color: ColorRGBA {
-                            r: match frame.1.extra_data.mesh_r {Some(x) => x, None => 255.0}, 
-                            g: match frame.1.extra_data.mesh_g {Some(x) => x, None => 255.0},
-                            b: match frame.1.extra_data.mesh_b {Some(x) => x, None => 255.0},
-                            a: match frame.1.extra_data.mesh_a {Some(x) => x, None => 255.0}
+                            r: match frame.1.extra_data.mesh_r {
+                                Some(x) => x,
+                                None => 0.0,
+                            },
+                            g: match frame.1.extra_data.mesh_g {
+                                Some(x) => x,
+                                None => 0.0,
+                            },
+                            b: match frame.1.extra_data.mesh_b {
+                                Some(x) => x,
+                                None => 0.0,
+                            },
+                            a: match frame.1.extra_data.mesh_a {
+                                Some(x) => x,
+                                None => 1.0,
+                            },
+                        },
+                        mesh_resource: match frame.1.extra_data.mesh_path {
+                            Some(path) => format!("file://{}", path.to_string()),
+                            None => "".to_string(),
                         },
                         ..Marker::default()
                     };
