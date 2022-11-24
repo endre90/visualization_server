@@ -16,7 +16,7 @@ use std::collections::HashSet;
 
 pub static NODE_ID: &'static str = "visualization_server";
 pub static BUFFER_MAINTAIN_RATE: u64 = 100;
-pub static MARKER_PUBLISH_RATE: u64 = 100;
+pub static MARKER_PUBLISH_RATE: u64 = 20;
 pub static FRAME_LIFETIME: i32 = 3; //seconds
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
