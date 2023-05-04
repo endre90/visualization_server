@@ -13,17 +13,17 @@ include(r2r_cargo.cmake)
 r2r_cargo(rcl                       # mandatory
           rcl_action                # mandatory
           rmw_fastrtps_cpp          # (needed to build with RMW_IMPLEMENTATION=rmw_fastrtps_cpp)
-          FastRTPS                  # (needed to build with RMW_IMPLEMENTATION=rmw_fastrtps_cpp)     
+          FastRTPS                  # (needed to build with RMW_IMPLEMENTATION=rmw_fastrtps_cpp)
           tf2_msgs                  # to publish TF messages to tf and tf_static
-          std_msgs                  # the Header message is here 
+          std_msgs                  # the Header message is here
           geometry_msgs             # the Transform and TransformStamped messages are here
-          scene_manipulation_msgs   # the TransformLookup and ManipulateScene service msgs       
+          scene_manipulation_msgs   # the TransformLookup and ManipulateScene service msgs
           visualization_msgs
          )
 
 # install binaries
 install(PROGRAMS
-  ${CMAKE_SOURCE_DIR}/target/release/visualization_server
+  ${CMAKE_SOURCE_DIR}/target/colcon/visualization_server
   DESTINATION lib/${PROJECT_NAME}
 )
 
